@@ -17,7 +17,11 @@ contract DIDRegistry {
     // @param _context The context of the DID
     // @param _metadata The metadata of the DID
     // @notice This function is used to register a DID
-    function registerDID(string memory _did, string memory _context, string memory _metadata) public {
+    function registerDID(
+        string memory _did,
+        string memory _context,
+        string memory _metadata
+    ) public {
         require(bytes(dids[_did].context).length == 0, "DID already exists");
         dids[_did] = DID(_context, _metadata);
     }
@@ -27,8 +31,19 @@ contract DIDRegistry {
     // @return context The context of the DID
     // @return metadata The metadata of the DID
     // @notice This function is used to get a DID
-    function getDID(string memory _did) public view returns (string memory, string memory) {
+    function getDID(
+        string memory _did
+    ) public view returns (string memory, string memory) {
         require(bytes(dids[_did].context).length != 0, "DID does not exist");
         return (dids[_did].context, dids[_did].metadata);
+    }
+
+    function updateDID(
+        string memory _did,
+        string memory _context,
+        string memory _metadata
+    ) public {
+        require(bytes(dids[_did].context).length != 0, "DID does not exist");
+        dids[_did] = DID(_context, _metadata);
     }
 }
