@@ -4,6 +4,13 @@
     "@nomicfoundation/hardhat-ethers": "^3.0.6",
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "ethers": "^6.13.1",
-    "hardhat": "^2.22.6"
-  }
+    "hardhat": "^2.22.6",
+    "typescript": "^5.8.2"
+  },
+  "scripts": {
+    "deploy:local": "hardhat run scripts/deploy-kanon.ts --network localhost",
+    "deploy:goerli": "hardhat run scripts/deploy-kanon.ts --network goerli",
+    "deploy:mainnet": "hardhat run scripts/deploy-kanon.ts --network mainnet"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

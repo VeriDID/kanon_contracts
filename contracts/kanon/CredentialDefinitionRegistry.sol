@@ -4,10 +4,10 @@ contract CredentialDefinitionRegistry {
     
     //@dev Struct to store the credential definition details
     //@param schemaId The schema id of the credential definition
-    //@param issuer The address of the issuer
+    //@param issuer The DID of the issuer
     struct CredentialDefinition {
         string schemaId;
-        address issuer;
+        string issuer;
     }
 
     //@dev Mapping to store the credential definitions
@@ -16,12 +16,12 @@ contract CredentialDefinitionRegistry {
     //@dev Function to register a credential definition
     //@param _credDefId The credential definition id
     //@param _schemaId The schema id of the credential definition
-    //@param _issuer The address of the issuer
+    //@param _issuer The DID of the issuer
     //@notice This function is used to register a credential definition
     function registerCredentialDefinition(
         string memory _credDefId,
         string memory _schemaId,
-        address _issuer
+        string memory _issuer
     ) public {
         require(
             bytes(credentialDefinitions[_credDefId].schemaId).length == 0,
@@ -36,11 +36,11 @@ contract CredentialDefinitionRegistry {
     //@dev Function to get a credential definition
     //@param _credDefId The credential definition id
     //@return schemaId The schema id of the credential definition
-    //@return issuer The address of the issuer
+    //@return issuer The DID of the issuer
     //@notice This function is used to get a credential definition
     function getCredentialDefinition(
         string memory _credDefId
-    ) public view returns (string memory, address) {
+    ) public view returns (string memory, string memory) {
         require(
             bytes(credentialDefinitions[_credDefId].schemaId).length != 0,
             "Credential Definition does not exist"

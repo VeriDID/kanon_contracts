@@ -120,27 +120,33 @@ contract Kanon {
     // @dev Function to register a credential definition
     // @param _credDefId The credential definition id
     // @param _schemaId The schema id of the credential definition
-    // @param _issuer The address of the issuer
+    // @param _issuerId The DID of the issuer
     // @notice This function is used to register a credential definition
     function registerCredentialDefinition(
         string memory _credDefId,
         string memory _schemaId,
-        address _issuer
+        string memory _issuerId
     ) public {
+        // Check if the issuer DID exists
+        if (!didExists(_issuerId)) {
+            revert DIDNotFound(_issuerId);
+        }
+        
         credDefRegistry.registerCredentialDefinition(
             _credDefId,
             _schemaId,
-            _issuer
+            _issuerId
         );
     }
 
     // @dev Function to get a credential definition
     // @param _credDefId The credential definition id
     // @return schemaId The schema id of the credential definition
+    // @return issuerId The DID of the issuer
     // @notice This function is used to get a credential definition
     function getCredentialDefinition(
         string memory _credDefId
-    ) public view returns (string memory, address) {
+    ) public view returns (string memory, string memory) {
         return credDefRegistry.getCredentialDefinition(_credDefId);
     }
 
